@@ -12,7 +12,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-20.04, ubuntu-latest]
-        ruby: ['2.1.9', '2.2.10', '2.3.8' ]
+        ruby: ['2.1.9', '2.2.9', '2.3.8' ]
         include:
           - ruby: '2.1.9'
             rack_version: '1.6.13'
