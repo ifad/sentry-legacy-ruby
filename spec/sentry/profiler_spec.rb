@@ -1,6 +1,6 @@
 require "spec_helper"
 
-return unless defined?(StackProf)
+if defined?(StackProf)
 
 RSpec.describe Sentry::Profiler do
   before do
@@ -299,4 +299,6 @@ RSpec.describe Sentry::Profiler do
       end
     end
   end
+end
+
 end

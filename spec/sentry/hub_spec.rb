@@ -152,9 +152,10 @@ RSpec.describe Sentry::Hub do
     end
 
     it "raises error when passing a non-string object" do
+      expected_class = 1.class.name
       expect do
         subject.capture_message(1)
-      end.to raise_error(ArgumentError, 'expect the argument to be a String, got Integer (1)')
+      end.to raise_error(ArgumentError, "expect the argument to be a String, got #{expected_class} (1)")
     end
 
     it "assigns default backtrace with caller" do
@@ -173,9 +174,10 @@ RSpec.describe Sentry::Hub do
     let(:slug) { "test_slug" }
 
     it "raises error when passing a non-string slug" do
+      expected_class = 1.class.name
       expect do
         subject.capture_check_in(1, :ok)
-      end.to raise_error(ArgumentError, 'expect the argument to be a String, got Integer (1)')
+      end.to raise_error(ArgumentError, "expect the argument to be a String, got #{expected_class} (1)")
     end
 
     it "raises error when passing an invalid status" do

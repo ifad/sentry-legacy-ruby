@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-return if Object.method_defined?(:duplicable?)
+unless Object.method_defined?(:duplicable?)
 
 #########################################
 #  This file was copied from Rails 5.2  #
@@ -152,4 +152,6 @@ class Rational
       false
     end
   end
+end
+
 end

@@ -1,4 +1,4 @@
-return unless defined?(Rack)
+if defined?(Rack)
 
 require 'spec_helper'
 
@@ -210,4 +210,6 @@ RSpec.describe Sentry::RequestInterface do
       expect(subject.headers.keys).to include("X-Forwarded-For")
     end
   end
+end
+
 end

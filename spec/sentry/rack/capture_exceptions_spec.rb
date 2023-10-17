@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-return unless defined?(Rack)
+if defined?(Rack)
 
 RSpec.describe Sentry::Rack::CaptureExceptions, rack: true do
   let(:exception) { ZeroDivisionError.new("divided by 0") }
@@ -739,4 +739,6 @@ RSpec.describe Sentry::Rack::CaptureExceptions, rack: true do
       end
     end
   end
+end
+
 end

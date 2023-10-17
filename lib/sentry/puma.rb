@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-return unless defined?(Puma::Server)
+if defined?(Puma::Server)
 
 module Sentry
   module Puma
@@ -30,3 +30,5 @@ module Sentry
 end
 
 Sentry.register_patch(Sentry::Puma::Server, Puma::Server)
+
+end

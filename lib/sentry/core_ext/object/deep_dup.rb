@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-return if Object.method_defined?(:deep_dup)
+unless Object.method_defined?(:deep_dup)
 
 require 'sentry/core_ext/object/duplicable'
 
@@ -58,4 +58,6 @@ class Hash
     end
     hash
   end
+end
+
 end

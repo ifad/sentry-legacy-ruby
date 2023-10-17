@@ -2,7 +2,7 @@ require "puma"
 require_relative "../spec_helper"
 
 # Because puma doesn't have any dependency, if Rack is not installed the entire test won't work
-return if ENV["RACK_VERSION"] == "0"
+if ENV["RACK_VERSION"] != "0" && Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('2.4.0')
 
 SimpleCov.command_name "RSpecIsolated"
 
@@ -124,4 +124,6 @@ RSpec.describe Puma::Server do
       expect(sentry_events).to be_empty
     end
   end
+end
+
 end
