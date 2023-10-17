@@ -1,0 +1,34 @@
+name: Ruby Gem CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04]
+        ruby: ['2.1.9', '2.2.10', '2.3.8' ]
+        include:
+          - ruby: '2.1.9'
+            rack_version: '1'
+            redis_rb_version: '3'
+          - ruby: '2.2.10'
+            rack_version: '2.2'
+            redis_rb_version: '4'
+          - ruby: '2.3.8'
+            rack_version: '2.2'
+            redis_rb_version: '4'        
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v4
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+        # bundler-cache: true
+    - run: RACK_VERSION=${{ matrix.rack_version }} REDIS_RB_VERSION=${{ matrix.redis_rb_version }} make build
+    - run: RACK_VERSION=${{ matrix.rack_version }} REDIS_RB_VERSION=${{ matrix.redis_rb_version }} bundle exec rake 
