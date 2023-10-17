@@ -31,5 +31,6 @@ jobs:
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
+    - run: rm -rf .git
     - run: RACK_VERSION=${{ matrix.rack_version }} REDIS_RB_VERSION=${{ matrix.redis_rb_version }} make build
     - run: RACK_VERSION=${{ matrix.rack_version }} REDIS_RB_VERSION=${{ matrix.redis_rb_version }} bundle exec rake 
