@@ -27,7 +27,7 @@ module Sentry
       # user can overwrite some of the configs, with a few exceptions like:
       # - include_local_variables
       # - auto_session_tracking
-      block&.call(dummy_config)
+      block.try(:call, dummy_config)
 
       # the base layer's client should already use the dummy config so nothing will be sent by accident
       base_client = Sentry::Client.new(dummy_config)
@@ -78,7 +78,7 @@ module Sentry
     # Extracts SDK's internal exception container (not actual exception objects) from an given event.
     # @return [Array<Sentry::SingleExceptionInterface>]
     def extract_sentry_exceptions(event)
-      event&.exception&.values || []
+      event.try(:exception).try(:values) || []
     end
   end
 end

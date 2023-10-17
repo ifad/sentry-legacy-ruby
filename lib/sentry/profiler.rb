@@ -227,7 +227,7 @@ module Sentry
     end
 
     def record_lost_event(reason)
-      Sentry.get_current_client&.transport&.record_lost_event(reason, 'profile')
+      Sentry.get_current_client.try(:transport).try(:record_lost_event, reason, 'profile')
     end
   end
 end

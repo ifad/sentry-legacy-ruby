@@ -145,7 +145,7 @@ module Sentry
     # from the incoming baggage stored on the transaction.
     # @return [String, nil]
     def to_baggage
-      transaction.get_baggage&.serialize
+      transaction.get_baggage.try(:serialize)
     end
 
     # @return [Hash]

@@ -5,7 +5,10 @@ require "timecop"
 require "simplecov"
 require "rspec/retry"
 require "redis"
-require "stackprof" unless RUBY_PLATFORM == "java"
+
+if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("2.3.0")
+  require "stackprof" unless RUBY_PLATFORM == "java"
+end
 
 SimpleCov.start do
   project_name "sentry-ruby"

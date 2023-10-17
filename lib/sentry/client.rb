@@ -25,7 +25,7 @@ module Sentry
         @transport = transport_class.new(configuration)
       else
         @transport =
-          case configuration.dsn&.scheme
+          case configuration.dsn.try(:scheme)
           when 'http', 'https'
             HTTPTransport.new(configuration)
           else

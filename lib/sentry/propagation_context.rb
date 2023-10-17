@@ -109,7 +109,7 @@ module Sentry
     # Returns the Dynamic Sampling Context from the baggage.
     # @return [String, nil]
     def get_dynamic_sampling_context
-      get_baggage&.dynamic_sampling_context
+      get_baggage.try(:dynamic_sampling_context)
     end
 
     private
@@ -123,7 +123,7 @@ module Sentry
         "trace_id" => trace_id,
         "environment" => configuration.environment,
         "release" => configuration.release,
-        "public_key" => configuration.dsn&.public_key,
+        "public_key" => configuration.dsn.try(:public_key),
         "user_segment" => @scope.user && @scope.user["segment"]
       }
 

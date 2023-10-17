@@ -147,9 +147,7 @@ module Sentry
 
     # @deprecated Use {#include_local_variables=} instead.
     def capture_exception_frame_locals=(value)
-      log_warn <<~MSG
-        `capture_exception_frame_locals` is now deprecated in favor of `include_local_variables`.
-      MSG
+      log_warn('`capture_exception_frame_locals` is now deprecated in favor of `include_local_variables`.')
 
       self.include_local_variables = value
     end
@@ -368,14 +366,13 @@ module Sentry
     def async=(value)
       check_callable!("async", value)
 
-      log_warn <<~MSG
+      log_warn <<-MSG
+sentry-ruby now sends events asynchronously by default with its background worker (supported since 4.1.0).
+The `config.async` callback has become redundant while continuing to cause issues.
+(The problems of `async` are detailed in https://github.com/getsentry/sentry-ruby/issues/1522)
 
-        sentry-ruby now sends events asynchronously by default with its background worker (supported since 4.1.0).
-        The `config.async` callback has become redundant while continuing to cause issues.
-        (The problems of `async` are detailed in https://github.com/getsentry/sentry-ruby/issues/1522)
-
-        Therefore, we encourage you to remove it and let the background worker take care of async job sending.
-      It's deprecation is planned in the next major release (6.0), which is scheduled around the 3rd quarter of 2022.
+Therefore, we encourage you to remove it and let the background worker take care of async job sending.
+It's deprecation is planned in the next major release (6.0), which is scheduled around the 3rd quarter of 2022.
       MSG
 
       @async = value
@@ -577,7 +574,7 @@ module Sentry
     end
 
     def valid?
-      if @dsn&.valid?
+      if @dsn.try(:valid?)
         true
       else
         @errors << "DSN not set or not valid"

@@ -21,7 +21,7 @@ module Sentry
             name: @name,
             crashed: @crashed,
             current: @current,
-            stacktrace: @stacktrace&.to_hash
+            stacktrace: @stacktrace.try(:to_hash)
           }
         ]
       }

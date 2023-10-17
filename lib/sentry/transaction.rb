@@ -236,9 +236,9 @@ module Sentry
     def finish(hub: nil, end_timestamp: nil)
       if hub
         log_warn(
-          <<~MSG
-            Specifying a different hub in `Transaction#finish` will be deprecated in version 5.0.
-            Please use `Hub#start_transaction` with the designated hub.
+          <<-MSG
+Specifying a different hub in `Transaction#finish` will be deprecated in version 5.0.
+Please use `Hub#start_transaction` with the designated hub.
           MSG
         )
       end
@@ -313,16 +313,16 @@ module Sentry
     def populate_head_baggage
       items = {
         "trace_id" => trace_id,
-        "sample_rate" => effective_sample_rate&.to_s,
-        "sampled" => sampled&.to_s,
+        "sample_rate" => effective_sample_rate.try(:to_s),
+        "sampled" => sampled.try(:to_s),
         "environment" => @environment,
         "release" => @release,
-        "public_key" => @dsn&.public_key
+        "public_key" => @dsn.try(:public_key)
       }
 
       items["transaction"] = name unless source_low_quality?
 
-      user = @hub.current_scope&.user
+      user = @hub.current_scope.try(:user)
       items["user_segment"] = user["segment"] if user && user["segment"]
 
       items.compact!

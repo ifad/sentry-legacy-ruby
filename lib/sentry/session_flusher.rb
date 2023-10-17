@@ -50,7 +50,7 @@ module Sentry
       log_debug("Killing session flusher")
 
       @exited = true
-      @thread&.kill
+      @thread.try(:kill)
     end
 
     private
@@ -76,7 +76,7 @@ module Sentry
     end
 
     def ensure_thread
-      return if @thread&.alive?
+      return if @thread.try(:alive?)
 
       @thread = Thread.new do
         loop do

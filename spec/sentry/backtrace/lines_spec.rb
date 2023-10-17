@@ -12,7 +12,7 @@ RSpec.describe Sentry::Backtrace::Line do
   end
 
   let(:in_app_pattern) do
-    project_root = Sentry.configuration.project_root&.to_s
+    project_root = Sentry.configuration.project_root.try(:to_s)
     Regexp.new("^(#{project_root}/)?#{Sentry::Backtrace::APP_DIRS_PATTERN}")
   end
 

@@ -21,7 +21,7 @@ module Sentry
     end
 
     def current_client
-      current_layer&.client
+      current_layer.try(:client)
     end
 
     def configuration
@@ -29,14 +29,14 @@ module Sentry
     end
 
     def current_scope
-      current_layer&.scope
+      current_layer.try(:scope)
     end
 
     def clone
       layer = current_layer
 
       if layer
-        scope = layer.scope&.dup
+        scope = layer.scope.try(:dup)
 
         Hub.new(layer.client, scope)
       end
@@ -133,7 +133,7 @@ module Sentry
 
       return unless event
 
-      current_scope.session&.update_from_exception(event.exception)
+      current_scope.session.try(:update_from_exception, event.exception)
 
       capture_event(event, **options, &block).tap do
         # mark the exception as captured so we can use this information to avoid duplicated capturing
@@ -202,7 +202,7 @@ module Sentry
         configuration.log_debug(event.to_json_compatible)
       end
 
-      @last_event_id = event&.event_id if event.is_a?(Sentry::ErrorEvent)
+      @last_event_id = event.try(:event_id) if event.is_a?(Sentry::ErrorEvent)
       event
     end
 
@@ -256,15 +256,15 @@ module Sentry
     def get_traceparent
       return nil unless current_scope
 
-      current_scope.get_span&.to_sentry_trace ||
+      current_scope.get_span.try(:to_sentry_trace) ||
         current_scope.propagation_context.get_traceparent
     end
 
     def get_baggage
       return nil unless current_scope
 
-      current_scope.get_span&.to_baggage ||
-        current_scope.propagation_context.get_baggage&.serialize
+      current_scope.get_span.try(:to_baggage) ||
+        current_scope.propagation_context.get_baggage.try(:serialize)
     end
 
     def get_trace_propagation_headers

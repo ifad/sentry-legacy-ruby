@@ -11,6 +11,8 @@ require "ruby-next/core_ext"
 require "sentry/version"
 require "sentry/exceptions"
 require "sentry/core_ext/object/deep_dup"
+require "sentry/core_ext/object/try"
+require "sentry/core_ext/thread/name"
 require "sentry/core_ext/zlib/gzip"
 require "sentry/core_ext/zlib/gunzip"
 require "sentry/utils/argument_checking_helper"
@@ -123,9 +125,7 @@ module Sentry
     def register_integration(name, version)
       if initialized?
         logger.warn(LOGGER_PROGNAME) do
-          <<~MSG
-            Integration '#{name}' is loaded after the SDK is initialized, which can cause unexpected behavior.  Please make sure all integrations are loaded before SDK initialization.
-          MSG
+          %(Integration '#{name}' is loaded after the SDK is initialized, which can cause unexpected behavior.  Please make sure all integrations are loaded before SDK initialization.)
         end
       end
 
@@ -252,7 +252,7 @@ module Sentry
         @session_flusher = nil
       end
 
-      if configuration&.include_local_variables
+      if configuration && configuration.include_local_variables
         exception_locals_tp.disable
       end
 

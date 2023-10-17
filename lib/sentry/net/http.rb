@@ -53,7 +53,9 @@ module Sentry
       private
 
       def set_propagation_headers(req)
-        Sentry.get_trace_propagation_headers&.each { |k, v| req[k] = v }
+        return nil unless Sentry.get_trace_propagation_headers
+
+        Sentry.get_trace_propagation_headers.each { |k, v| req[k] = v }
       end
 
       def record_sentry_breadcrumb(request_info, res)

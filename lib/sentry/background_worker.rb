@@ -60,7 +60,7 @@ module Sentry
 
     def shutdown
       log_debug("Shutting down background worker")
-      @shutdown_callback&.call
+      @shutdown_callback.try(:call)
     end
 
     private

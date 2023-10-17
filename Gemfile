@@ -19,9 +19,12 @@ gem "timecop"
 gem "simplecov"
 gem "simplecov-cobertura", "~> 1.4"
 gem "rexml"
-gem "stackprof" unless RUBY_PLATFORM == "java"
 
 ruby_version = Gem::Version.new(RUBY_VERSION)
+
+if ruby_version >= Gem::Version.new("2.3.0")
+  gem "stackprof" unless RUBY_PLATFORM == "java"
+end
 
 if ruby_version >= Gem::Version.new("2.6.0")
   gem "debug", github: "ruby/debug", platform: :ruby
@@ -39,5 +42,5 @@ gem "benchmark_driver"
 gem "benchmark-ipsa"
 gem "benchmark-memory"
 
-gem "yard", github: "lsegal/yard"
+gem "yard", github: "lsegal/yard", ref: 'main'
 gem "webrick"
