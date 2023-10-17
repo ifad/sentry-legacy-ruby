@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.homepage = "https://github.com/getsentry/sentry-ruby"
 
   spec.platform = Gem::Platform::RUBY
-  spec.required_ruby_version = '>= 2.2'
+  spec.required_ruby_version = '>= 2.1'
   spec.extra_rdoc_files = ["README.md", "LICENSE.txt"]
   spec.files = `git ls-files | grep -Ev '^(spec|benchmarks|examples)'`.split("\n")
 
@@ -21,6 +21,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "backports"
-  spec.add_dependency "ruby-next"
+  #spec.add_dependency "ruby-next"
   spec.add_dependency "concurrent-ruby", '~> 1.0', '>= 1.0.2'
 end

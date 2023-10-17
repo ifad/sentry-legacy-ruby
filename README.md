@@ -8,4 +8,4 @@
   </a>
 </p>
 
-This is IFAD mirror of `sentry-ruby` gem with added support of legacy rubies (currently versions 2.3 and 2.2).
+This is IFAD mirror of `sentry-ruby` gem with added support of legacy rubies (currently versions 2.3, 2.2 and 2.1).
