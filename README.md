@@ -1,3 +1,5 @@
+# Sentry
+
 <p align="center">
   <a href="https://sentry.io/?utm_source=github&utm_medium=logo" target="_blank">
     <picture>
@@ -9,3 +11,7 @@
 </p>
 
 This is IFAD mirror of `sentry-ruby` gem with added support of legacy rubies (currently versions 2.3, 2.2 and 2.1).
+
+## Considerations
+
+Ruby 2.2 with Ubuntu-latest is not working due to sefmentaiton fault [https://github.com/ruby/setup-ruby/issues/496]
