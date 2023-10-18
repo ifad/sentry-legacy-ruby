@@ -31,8 +31,6 @@ jobs:
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
-        bundler: none
     - run: rm -rf .git
-    - run: gem install --ignore-dependencies bundler -v '~> 1.0'
     - run: RACK_VERSION=${{ matrix.rack_version }} REDIS_RB_VERSION=${{ matrix.redis_rb_version }} make build
     - run: RACK_VERSION=${{ matrix.rack_version }} REDIS_RB_VERSION=${{ matrix.redis_rb_version }} bundle exec rake 
