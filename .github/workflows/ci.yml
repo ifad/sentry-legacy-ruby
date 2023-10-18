@@ -23,6 +23,9 @@ jobs:
           - ruby: '2.3.8'
             rack_version: '2.2.8'
             redis_rb_version: '4.4.0'
+        exclude:
+          - ruby: '2.2.10'
+            os: ubuntu-latest
     runs-on: ${{ matrix.os }}
     steps:
     - name: Start Redis

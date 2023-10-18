@@ -10,6 +10,8 @@
   </a>
 </p>
 
+![CI](https://github.com/ifad/sentry-legacy-ruby/actions/workflows/ci.yml/badge.svg)
+
 This is IFAD mirror of `sentry-ruby` gem with added support of legacy rubies (currently versions 2.3, 2.2 and 2.1).
 
 ## Considerations
