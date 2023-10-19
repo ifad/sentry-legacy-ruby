@@ -29,7 +29,7 @@ require 'yaml'
 Sentry.init do |config|
   config.dsn = YAML.load_file('config/sentry.yml')[Rails.env.to_s]['dsn']
   config.breadcrumbs_logger = [:sentry_logger, :http_logger]
-  config.enabled_environments = %w[production staging training]
+  config.enabled_environments = %w[production staging training sandbox]
 
 
   # To activate performance monitoring, set one of these options.
