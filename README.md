@@ -81,6 +81,7 @@ end
 
 ```
 def notify_sentry(level, exception, options = {})
+  options[:level] = level
   Sentry.notify_exception(exception, options)
 end
 ```
