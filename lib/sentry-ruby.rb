@@ -4,7 +4,11 @@ require "English"
 require "forwardable"
 require "time"
 
-require "backports/2.4"
+require "backports/2.3.0/array/dig"
+require "backports/2.3.0/enumerable/grep_v"
+require "backports/2.3.0/hash/dig"
+require "backports/2.4.0/hash/compact"
+require "backports/2.4.0/string/match"
 
 require "sentry/version"
 require "sentry/exceptions"

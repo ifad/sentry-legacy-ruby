@@ -21,6 +21,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "backports"
-  #spec.add_dependency "ruby-next"
   spec.add_dependency "concurrent-ruby", '~> 1.0', '>= 1.0.2'
 end
