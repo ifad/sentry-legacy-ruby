@@ -1,13 +1,23 @@
-class Object
-  def try(method_name, *args)
-    return nil unless respond_to?(method_name)
-
-    public_send(method_name, *args)
-  end
+# try active support `try` first
+begin
+  require 'active_support/core_ext/object/try'
+rescue LoadError
 end
 
-class NilClass
-  def try(*args)
-    nil
+unless Object.method_defined?(:try)
+  class Object
+    def try(*a, &b)
+      if a.empty? && block_given?
+        yield self
+      else
+        __send__(*a, &b)
+      end
+    end
+  end
+
+  class NilClass
+    def try(*args)
+      nil
+    end
   end
 end
