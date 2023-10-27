@@ -22,12 +22,15 @@ Ruby 2.2 with Ubuntu-latest is not working due to sefmentaiton fault [https://gi
 
 Create a `config/initializers/sentry.rb` with
 
-```
+```ruby
+
 require 'sentry-ruby'
 require 'yaml'
 Sentry.init do |config|
   config.dsn = YAML.load_file('config/sentry.yml')[Rails.env.to_s]['dsn']
   config.breadcrumbs_logger = [:sentry_logger, :http_logger]
+  config.enabled_environments = %w[production staging training sandbox]
+
 
   # To activate performance monitoring, set one of these options.
   # We recommend adjusting the value in production:
@@ -78,6 +81,7 @@ end
 
 ```
 def notify_sentry(level, exception, options = {})
+  options[:level] = level
   Sentry.notify_exception(exception, options)
 end
 ```
